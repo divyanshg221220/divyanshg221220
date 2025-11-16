@@ -15,7 +15,9 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-# GitHub Stats
+## I'm [Divyansh Gupta](https://divyanshg221220.github.io/PORTFOLIO/) !
+
+### GitHub Stats
 
 <div align="center">
 <a href="https://github.com/divyanshg221220">
