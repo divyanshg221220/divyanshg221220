@@ -18,6 +18,7 @@ Here are some ideas to get you started:
 # GitHub Stats
 
 <div align="center">
-
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=divyanshg221220" alt="Top Languages" href="https://github.com/divyanshg221220"/>
+<a href="https://github.com/divyanshg221220">
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=divyanshg221220" alt="Top Languages"/>
+</a>
 </div>
