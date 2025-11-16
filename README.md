@@ -19,6 +19,5 @@ Here are some ideas to get you started:
 
 <div align="center">
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=divyanshg221220&layout=compact&theme=tokyonight&hide_border=true&langs_count=8)
-
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=divyanshg221220" alt="Top Languages" />
 </div>
