@@ -19,5 +19,5 @@ Here are some ideas to get you started:
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=divyanshg221220" alt="Top Languages" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=divyanshg221220" alt="Top Languages" href="https://github.com/divyanshg221220"/>
 </div>
