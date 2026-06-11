@@ -24,3 +24,6 @@ Here are some ideas to get you started:
 <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=divyanshg221220" alt="Top Languages"/>
 </a>
 </div>
+
+### Want to connect?
+Feel free to reach out to me on [LinkedIn](https://www.linkedin.com/in/divyanshg221220/) or send me an [email](mailto:divyanshg221220@outlook.com). I'm always interested in collaborating on exciting projects and meeting fellow developers :)
