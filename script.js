@@ -98,7 +98,16 @@ function initScrollSpy() {
 // ---------- 4. optional live enhancement: public GitHub stats ----------
 // Text for the card lives in the <template id="githubStatTemplate">
 // in index.html, not here — this just fills in the number and
-// drops the card into the page. Fails silently if offline/rate-limited.
+// drops the card into the page. Fails silently if offline.
+//
+// NOTE: this used to read total_count from GitHub's /search/commits
+// endpoint. That endpoint is backed by a search index that lags
+// behind real activity (sometimes by hours) and undercounts commits
+// whose author email isn't linked/verified on the account — it was
+// producing stale/wrong numbers. Switched to github-contributions-api
+// (jogruber.de), a widely-used read-only mirror of the same
+// contribution-calendar data shown on a GitHub profile page, summed
+// across all years.
 async function addGithubStatCard() {
   const template = document.getElementById("githubStatTemplate");
   const target = document.getElementById("aboutStats");
@@ -106,14 +115,18 @@ async function addGithubStatCard() {
 
   try {
     const res = await fetch(
-      "https://api.github.com/search/commits?q=author:divyanshg221220",
-      { headers: { Accept: "application/vnd.github+json" } },
+      "https://github-contributions-api.jogruber.de/v4/divyanshg221220?y=all",
     );
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
 
+    const total = Object.values(data.total || {}).reduce(
+      (sum, n) => sum + n,
+      0,
+    );
+
     const clone = template.content.cloneNode(true);
-    clone.querySelector('[data-role="value"]').textContent = data.total_count;
+    clone.querySelector('[data-role="value"]').textContent = total;
     applyLangToScope(clone, CURRENT_LANG);
     target.appendChild(clone);
   } catch (err) {
