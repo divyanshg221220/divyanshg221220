@@ -63,6 +63,48 @@ a {
   text-decoration: none;
 }
 
+/* Visible keyboard focus. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Skip-to-content link */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 12px;
+  z-index: 100;
+  background: var(--accent);
+  color: #141821;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 4px;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .prompt .cursor {
+    animation: none;
+    opacity: 1;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
 /* subtle grid texture behind everything */
 body::before {
   content: "";
@@ -84,7 +126,7 @@ body::before {
   z-index: 1;
 }
 
-/* Hindi typography: swap in Devanagari font wherever data-lang="hi" */
+/* Hindi typography */
 [data-lang="hi"] body {
   font-family: "Noto Sans Devanagari", var(--sans);
 }
@@ -103,7 +145,6 @@ body::before {
 [data-lang="hi"] .contact-value {
   font-family: "Noto Sans Devanagari", var(--sans);
 }
-/* keep literal-code lines in monospace/English even in Hindi mode */
 [data-lang="hi"] .prompt,
 [data-lang="hi"] .role,
 [data-lang="hi"] .achievement-header span,
@@ -126,6 +167,30 @@ nav {
 [data-theme="light"] nav {
   background: rgba(246, 244, 238, 0.92);
 }
+nav::before,
+nav::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+  pointer-events: none;
+  z-index: 2;
+}
+nav::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg), transparent);
+}
+nav::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg), transparent);
+}
+[data-theme="light"] nav::before {
+  background: linear-gradient(to right, var(--bg-raised), transparent);
+}
+[data-theme="light"] nav::after {
+  background: linear-gradient(to left, var(--bg-raised), transparent);
+}
 .navlist {
   display: flex;
   align-items: center;
@@ -134,6 +199,8 @@ nav {
   padding: 14px 14px;
   max-width: 920px;
   margin: 0 auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
   scrollbar-width: none;
 }
 .navlist::-webkit-scrollbar {
@@ -156,6 +223,10 @@ nav {
   color: var(--accent);
   border-color: var(--accent-dim);
 }
+.nav-node[aria-current="true"] {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+}
 .nav-node .nav-bullet {
   color: var(--text-dim);
   font-size: 10px;
@@ -172,7 +243,6 @@ nav {
   font-style: italic;
 }
 
-/* theme + language toggle buttons, live in the nav bar */
 .theme-toggle,
 .lang-toggle {
   margin-left: 8px;
@@ -291,7 +361,6 @@ h1 .accent {
   color: var(--accent);
 }
 
-/* profile chip row: LinkedIn / GitHub / LeetCode */
 .profile-strip {
   display: flex;
   gap: 10px;
@@ -337,11 +406,25 @@ h1 .accent {
 }
 
 /* ================================================================
-   5. SECTION SHARED (eyebrow / heading styles used by every section)
+   5. SECTION SHARED
 ================================================================= */
 section {
   padding: 64px 0;
   border-top: 1px solid var(--line);
+  opacity: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  section {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+  section.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .eyebrow {
   font-family: var(--mono);
@@ -445,7 +528,7 @@ h2 {
 }
 
 /* ================================================================
-   8. ACHIEVEMENTS (#achievements) — terminal-style log box
+   8. ACHIEVEMENTS (#achievements)
 ================================================================= */
 .achievement-box {
   background: var(--bg-raised);
@@ -655,10 +738,25 @@ h2 {
 /* ================================================================
    12. CONTACT (#contact)
 ================================================================= */
-.contact-grid {
+.contact-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "email     linkedin  qr"
+    "github    leetcode  qr";
   gap: 16px;
+}
+.contact-email {
+  grid-area: email;
+}
+.contact-linkedin {
+  grid-area: linkedin;
+}
+.contact-github {
+  grid-area: github;
+}
+.contact-leetcode {
+  grid-area: leetcode;
 }
 .contact-card {
   background: var(--bg-raised);
@@ -666,11 +764,14 @@ h2 {
   border-radius: 6px;
   padding: 18px;
   display: block;
-  transition: border-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 .contact-card:hover {
   border-color: var(--accent-dim);
 }
+
 .contact-card .contact-field {
   font-family: var(--mono);
   font-size: 11px;
@@ -683,6 +784,75 @@ h2 {
   font-size: 14px;
   color: var(--text);
   word-break: break-word;
+}
+
+/* QR tile styling */
+a.contact-card.qr-card {
+  grid-area: qr;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 18px;
+}
+
+a.contact-card.qr-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.qr-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: 150px;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.qr-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 14px;
+  display: block;
+}
+
+.qr-frame.qr-missing {
+  border-style: dashed;
+}
+.qr-frame.qr-missing img {
+  display: none;
+}
+.qr-frame.qr-missing::after {
+  content: "Add qr-code image to show it here.";
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  padding: 18px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "email"
+      "linkedin"
+      "qr"
+      "github"
+      "leetcode";
+  }
+  .qr-frame {
+    max-width: 220px;
+  }
 }
 
 /* ================================================================

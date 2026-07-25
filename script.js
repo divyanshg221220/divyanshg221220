@@ -1,33 +1,14 @@
 // ============================================================
 // Divyansh Gupta Portfolio — behavior only.
-// All visible text lives in index.html. English is the text
-// already sitting in each element; Hindi lives in that same
-// element's data-hi="..." attribute. This file only toggles
-// between the two — it holds no site content itself.
-//
-// HOW TO EDIT THE SITE
-// ---------------------------------------------------------------
-// - Change English text: edit it directly inside the HTML tag.
-// - Change/add Hindi text: edit or add a data-hi="..." attribute
-//   on that same tag. If an element has no data-hi, it just stays
-//   in English when the visitor switches languages — nothing
-//   breaks.
-// - Add a project/skill/certification/education entry, a social
-//   link, etc.: copy an existing block in index.html (e.g. one
-//   .project-card or .cert-card) and edit the copy. No JS changes
-//   needed — this file works off data-hi generically, so any new
-//   section picks up language + theme switching for free.
 // ============================================================
 
 let CURRENT_LANG = "en";
 
 // ---------- 1. language toggle ----------
-// Swaps innerHTML (not textContent) so inline tags like <strong>
-// in the English version are preserved when switching back.
 function applyLangToScope(scopeEl, lang) {
   scopeEl.querySelectorAll("[data-hi]").forEach((el) => {
     if (el.dataset.en === undefined) {
-      el.dataset.en = el.innerHTML; // cache the original English once
+      el.dataset.en = el.innerHTML;
     }
     el.innerHTML = lang === "hi" ? el.dataset.hi : el.dataset.en;
   });
@@ -50,11 +31,24 @@ function initLang() {
   });
 }
 
-// ---------- 2. theme toggle ----------
+// ---------- 2. theme toggle & QR Image Dynamic Switch ----------
+function updateQrTheme() {
+  const qrImage = document.getElementById("qrImage");
+  if (!qrImage) return;
+
+  const currentTheme = document.documentElement.getAttribute("data-theme");
+  if (currentTheme === "light") {
+    qrImage.src = "divyanshg221220 light.svg";
+  } else {
+    qrImage.src = "divyanshg221220 dark.svg";
+  }
+}
+
 function initTheme() {
   const theme = localStorage.getItem("portfolio-theme") || "dark";
   document.documentElement.setAttribute("data-theme", theme);
   updateThemeIcon(theme);
+  updateQrTheme();
 
   document.getElementById("themeToggle").addEventListener("click", () => {
     const current = document.documentElement.getAttribute("data-theme");
@@ -62,6 +56,7 @@ function initTheme() {
     document.documentElement.setAttribute("data-theme", next);
     localStorage.setItem("portfolio-theme", next);
     updateThemeIcon(next);
+    updateQrTheme();
   });
 }
 
@@ -80,6 +75,11 @@ function initScrollSpy() {
       const isActive = node.getAttribute("href") === `#${id}`;
       node.style.color = isActive ? "var(--accent)" : "";
       node.style.borderColor = isActive ? "var(--accent-dim)" : "";
+      if (isActive) {
+        node.setAttribute("aria-current", "true");
+      } else {
+        node.removeAttribute("aria-current");
+      }
     });
   };
 
@@ -95,19 +95,27 @@ function initScrollSpy() {
   sections.forEach((section) => observer.observe(section));
 }
 
-// ---------- 4. optional live enhancement: public GitHub stats ----------
-// Text for the card lives in the <template id="githubStatTemplate">
-// in index.html, not here — this just fills in the number and
-// drops the card into the page. Fails silently if offline.
-//
-// NOTE: this used to read total_count from GitHub's /search/commits
-// endpoint. That endpoint is backed by a search index that lags
-// behind real activity (sometimes by hours) and undercounts commits
-// whose author email isn't linked/verified on the account — it was
-// producing stale/wrong numbers. Switched to github-contributions-api
-// (jogruber.de), a widely-used read-only mirror of the same
-// contribution-calendar data shown on a GitHub profile page, summed
-// across all years.
+// ---------- 4. scroll reveal ----------
+function initScrollReveal() {
+  const sections = document.querySelectorAll("section[id]");
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 },
+  );
+
+  sections.forEach((section) => observer.observe(section));
+}
+
+// ---------- 5. GitHub stats ----------
 async function addGithubStatCard() {
   const template = document.getElementById("githubStatTemplate");
   const target = document.getElementById("aboutStats");
@@ -131,13 +139,51 @@ async function addGithubStatCard() {
     target.appendChild(clone);
   } catch (err) {
     console.warn("GitHub stats unavailable:", err.message);
+    const fallback = document.createElement("div");
+    fallback.className = "stat-box";
+    fallback.innerHTML =
+      '<div class="stat-label" style="margin-top:0">GitHub stats unavailable right now — see profile directly.</div>';
+    target.appendChild(fallback);
   }
 }
 
-// ---------- 5. boot ----------
+// ---------- 6. nav mouse-wheel scroll ----------
+function initNavWheelScroll() {
+  const navlist = document.querySelector(".navlist");
+  if (!navlist) return;
+
+  navlist.addEventListener(
+    "wheel",
+    (e) => {
+      if (navlist.scrollWidth <= navlist.clientWidth) return;
+      const delta =
+        Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (delta === 0) return;
+      e.preventDefault();
+      navlist.scrollLeft += delta;
+    },
+    { passive: false },
+  );
+}
+
+// ---------- 7. QR code fallback ----------
+function initQrFallback() {
+  const img = document.getElementById("qrImage");
+  const frame = document.getElementById("qrFrame");
+  if (!img || !frame) return;
+
+  img.addEventListener("error", () => {
+    frame.classList.add("qr-missing");
+  });
+}
+
+// ---------- 8. boot ----------
 document.addEventListener("DOMContentLoaded", () => {
   initLang();
   initTheme();
   initScrollSpy();
+  initScrollReveal();
   addGithubStatCard();
+  initNavWheelScroll();
+  initQrFallback();
 });
