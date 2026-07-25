@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Divyansh Gupta — Artificial Intelligence & Data Science Engineer
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ============================================================
+         NAV
+         Order here must match the section order below:
+         home -> about -> skills -> achievements -> projects ->
+         certifications -> education -> contact
+    ============================================================= -->
+    <nav>
+      <div class="navlist">
+        <a class="nav-node" href="#home">
+          <span class="nav-bullet">*</span>
+          <span data-hi="होम">home</span>
+        </a>
+        <span class="separator-arrow">-></span>
+        <a class="nav-node" href="#about">
+          <span class="nav-bullet">*</span>
+          <span data-hi="परिचय">about</span>
+        </a>
+        <span class="separator-arrow">-></span>
+        <a class="nav-node" href="#skills">
+          <span class="nav-bullet">*</span>
+          <span data-hi="कौशल">skills</span>
+        </a>
+        <span class="separator-arrow">-></span>
+        <a class="nav-node" href="#achievements">
+          <span class="nav-bullet">*</span>
+          <span data-hi="उपलब्धियां">achievements</span>
+        </a>
+        <span class="separator-arrow">-></span>
+        <a class="nav-node" href="#projects">
+          <span class="nav-bullet">*</span>
+          <span data-hi="प्रोजेक्ट्स">projects</span>
+        </a>
+        <span class="separator-arrow">-></span>
+        <a class="nav-node" href="#certifications">
+          <span class="nav-bullet">*</span>
+          <span data-hi="प्रमाणपत्र">certifications</span>
+        </a>
+        <span class="separator-arrow">-></span>
+        <a class="nav-node" href="#education">
+          <span class="nav-bullet">*</span>
+          <span data-hi="शिक्षा">education</span>
+        </a>
+        <span class="separator-arrow">-></span>
+        <a class="nav-node" href="#contact">
+          <span class="nav-bullet">*</span>
+          <span data-hi="संपर्क">contact</span>
+        </a>
+        <span class="separator-arrow">-></span>
+        <span class="nav-node null">NULL</span>
+        <button
+          id="langToggle"
+          class="lang-toggle"
+          type="button"
+          aria-label="Switch language / भाषा बदलें"
+          title="English / हिन्दी"
+        >
+          <span class="lang-label" data-hi="हिं">EN</span>
+        </button>
+        <button
+          id="themeToggle"
+          class="theme-toggle"
+          type="button"
+          aria-label="Switch light / dark theme"
+          title="Light / Dark"
+        >
+          <span class="theme-icon">◐</span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- ================= HERO ================= -->
+      <header id="home">
+        <div class="prompt">
+          $ whoami
+          <span class="cursor"></span>
+        </div>
+        <h1>
+          <span class="accent">Divyansh </span>
+          Gupta
+        </h1>
+        <div class="role">
+          struct student { char* field =
+          <span>"Artificial Intelligence &amp; Data Science Engineering"</span>
+          ; };
+        </div>
+        <p
+          class="intro-text"
+          data-hi="यूनिवर्सिटी स्कूल ऑफ ऑटोमेशन एंड रोबोटिक्स (USAR), GGSIPU दिल्ली में प्रथम वर्ष का B.Tech छात्र। फिलहाल डेटा-स्ट्रक्चर लैब में गहराई से जुटा हूं — C भाषा में ग्राफ, क्यू और ट्रैवर्सल लॉजिक बना रहा हूं, एक-एक malloc के साथ।"
+        >
+          Second-year B.Tech student at University School of Automation &
+          Robotics (USAR), GGSIPU Delhi.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#projects" data-hi="प्रोजेक्ट्स देखें"
+            >view projects</a
+          >
+          <a class="btn ghost" href="#contact" data-hi="संपर्क करें"
+            >get in touch</a
+          >
+        </div>
+
+        <!-- Profile links: LinkedIn / GitHub / LeetCode -->
+        <div class="profile-strip">
+          <a
+            class="profile-chip"
+            data-platform="linkedin"
+            href="https://www.linkedin.com/in/divyanshg221220/"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="chip-dot"></span>linkedin: in/divyanshg221220
+          </a>
+          <a
+            class="profile-chip"
+            data-platform="github"
+            href="https://github.com/divyanshg221220"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="chip-dot"></span>github: divyanshg221220
+          </a>
+          <a
+            class="profile-chip"
+            data-platform="leetcode"
+            href="https://leetcode.com/u/divyanshg221220/"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="chip-dot"></span>leetcode: divyanshg221220
+          </a>
+        </div>
+      </header>
+
+      <!-- ================= 01 / ABOUT ================= -->
+      <section id="about">
+        <div class="eyebrow">01 / <span data-hi="परिचय">about</span></div>
+        <h2>
+          <span data-hi="परिचय">About</span>
+          <span class="struct-tag">struct About</span>
+        </h2>
+        <div class="about-grid">
+          <div class="about-text">
+            <p
+              data-hi="मैंने कक्षा 11–12 में ही व्यवस्थित रूप से कोडिंग शुरू कर दी थी — NCERT और सुमिता अरोड़ा से Python, और यशवंत कनेटकर की Let Us C से C भाषा — और तब से यह सिलसिला रुका नहीं।"
+            >
+              I started coding systematically back in Class 11–12 — Python from
+              NCERT and Sumita Arora, C from Yashavant Kanetkar's
+              <strong>Let Us C</strong> — and never really stopped.
+            </p>
+            <p
+              data-hi="यही आदत अब मेरा पूरा वर्कफ़्लो है: लिखो → टेस्ट करो → तोड़ो → डिबग करो → फिर से सबमिट करो। फिलहाल इसका मतलब है USAR के सेमेस्टर 2 के डेटा-स्ट्रक्चर लैब पर काम करना — C में लिंक्ड लिस्ट, स्टैक, क्यू और ग्राफ — और काफी समय dangling pointers तथा off-by-one बग्स को पकड़ने में जाता है।"
+            >
+              That habit is basically my whole workflow now:
+              <strong>write → test → break → debug → resubmit.</strong>
+              Right now that means working through USAR's Semester 2 data
+              structures lab in C — linked lists, stacks, queues, and graphs —
+              with a lot of time spent chasing dangling pointers and off-by-one
+              bugs.
+            </p>
+            <p
+              data-hi="पढ़ाई के अलावा, मैं एक सक्रिय GitHub बनाए रखता हूं, यह पोर्टफोलियो मेंटेन करता हूं, और NIT दिल्ली में हुए राष्ट्रीय स्तर के हैकाथॉन Code Slayer 2k25 में भाग ले चुका हूं।"
+            >
+              Outside of coursework, I keep an active GitHub, maintain this
+              portfolio, and competed at <strong>Code Slayer 2k25</strong>, a
+              national-level hackathon at NIT Delhi.
+            </p>
+          </div>
+          <div class="stat-stack" id="aboutStats">
+            <div class="stat-box">
+              <div class="stat-value">2025–2029</div>
+              <div class="stat-label" data-hi="B.Tech AI और DS, USAR / GGSIPU">
+                B.Tech AI & DS, USAR / GGSIPU
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hidden template for the optional live GitHub stat card.
+           Text lives here in the HTML, not in script.js; script.js only
+           fills in the numeric value it fetches. -->
+      <template id="githubStatTemplate">
+        <div class="stat-box">
+          <div class="stat-value" data-role="value">—</div>
+          <div class="stat-label" data-hi="GitHub योगदान (कुल)">
+            GitHub contributions
+          </div>
+        </div>
+      </template>
+
+      <!-- ================= 02 / SKILLS ================= -->
+      <section id="skills">
+        <div class="eyebrow">02 / <span data-hi="कौशल">skills</span></div>
+        <h2>
+          <span data-hi="कौशल">Skills</span>
+          <span class="struct-tag">enum Skills</span>
+        </h2>
+        <div class="skills-group">
+          <div class="skill-card">
+            <div class="skill-category" data-hi="भाषाएं">languages</div>
+            <div class="pill-row">
+              <span class="skill-pill">C</span>
+              <span class="skill-pill">MySQL</span>
+              <span class="skill-pill">Python</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-category" data-hi="वेब">web</div>
+            <div class="pill-row">
+              <span class="skill-pill">CSS</span>
+              <span class="skill-pill">HTML</span>
+              <span class="skill-pill">JavaScript</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-category" data-hi="टूल्स और सिस्टम">
+              tools & systems
+            </div>
+            <div class="pill-row">
+              <span class="skill-pill">Git / GitHub</span>
+              <span class="skill-pill">Linux</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-category" data-hi="रुचियां">interests</div>
+            <div class="pill-row">
+              <span class="skill-pill">Artificial Intelligence</span>
+              <span class="skill-pill">Cyberethics</span>
+              <span class="skill-pill">Cybersecurity</span>
+              <span class="skill-pill">Data Science</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-category" data-hi="अन्य">other</div>
+            <div class="pill-row">
+              <span class="skill-pill">Basics Of Computer Organisation</span>
+              <span class="skill-pill"
+                >Computer Architecture And Organization</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 03 / ACHIEVEMENTS ================= -->
+      <section id="achievements">
+        <div class="eyebrow">
+          03 / <span data-hi="उपलब्धियां">achievements</span>
+        </div>
+        <h2 data-hi="उपलब्धियां">Achievements</h2>
+        <div class="achievement-box">
+          <div class="achievement-header">
+            <span class="status-dot red"></span>
+            <span class="status-dot yellow"></span>
+            <span class="status-dot green"></span>
+            <span>achievements.log</span>
+          </div>
+          <div class="achievement-body">
+            <div class="achievement-item">
+              <span class="achievement-index">01</span>
+              <span class="achievement-text">
+                <strong>2nd place at CipherQuest 2025</strong> —
+                <span
+                  data-hi="NIT दिल्ली में एक राष्ट्रीय स्तर के हैकाथॉन में भाग लिया, समय की सीमा में एक प्रोजेक्ट बनाकर प्रस्तुत किया।"
+                  >Competed in a Capture The Flag (CTF) at Elysian, finding and
+                  exploiting bugs.</span
+                >
+              </span>
+              <a
+                class="project-link"
+                href="https://www.linkedin.com/posts/divyanshg221220_ggsipu-ipu-ggsipuedc-activity-7385206872116740096-qnhO?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFgGLqcBA-DpSTsAH-S8Ifqgusv5KGYsLoc"
+                target="_blank"
+                rel="noopener"
+                data-hi="रेपो ↗"
+                >post ↗</a
+              >
+            </div>
+            <div class="achievement-item">
+              <span class="achievement-index">02</span>
+              <span class="achievement-text">
+                <strong>Smart India Hackathon [SIH]</strong> —
+                <span data-hi="कक्षा 12 कंप्यूटर साइंस बोर्ड परीक्षा स्कोर।"
+                  >Competed in a national-level hackathon, building and
+                  representing innovative ideas with creative ways of solving
+                  it.</span
+                >
+              </span>
+              <a
+                class="project-link"
+                href="https://www.linkedin.com/posts/divyanshg221220_ministryofeducation-smartindiahackathon-hackathon-activity-7424778440664494080--yKw?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFgGLqcBA-DpSTsAH-S8Ifqgusv5KGYsLoc"
+                target="_blank"
+                rel="noopener"
+                data-hi="रेपो ↗"
+                >post ↗</a
+              >
+            </div>
+            <div class="achievement-item">
+              <span class="achievement-index">03</span>
+              <span class="achievement-text">
+                <strong>Code Slayer 2k25</strong> —
+                <span
+                  data-hi="सेमेस्टर-1 के C कोर्सवर्क में लगातार GitHub गतिविधि।"
+                  >Competed in a national-level hackathon, building and
+                  presenting a project under time pressure alongside teams from
+                  across India.
+                </span>
+              </span>
+              <a
+                class="project-link"
+                href="https://www.linkedin.com/posts/divyanshg221220_codeslayer2k25-hackathon-nitdelhi-activity-7473431840557711360-RbTO?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFgGLqcBA-DpSTsAH-S8Ifqgusv5KGYsLoc"
+                target="_blank"
+                rel="noopener"
+                data-hi="रेपो ↗"
+                >post ↗</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 04 / PROJECTS ================= -->
+      <section id="projects">
+        <div class="eyebrow">
+          04 / <span data-hi="प्रोजेक्ट्स">projects</span>
+        </div>
+        <h2>
+          <span data-hi="प्रोजेक्ट्स">Projects</span>
+          <span class="struct-tag">Project[]</span>
+        </h2>
+        <div class="project-grid">
+          <div class="project-card">
+            <div class="project-top">
+              <h3>ATM Management System</h3>
+              <a
+                class="project-link"
+                href="https://github.com/divyanshg221220/ATM"
+                target="_blank"
+                rel="noopener"
+                data-hi="रेपो ↗"
+                >repo ↗</a
+              >
+            </div>
+            <p
+              data-hi="एक कमांड-लाइन ATM सिमुलेशन जो सुरक्षित बैंकिंग लेनदेन को सपोर्ट करता है, अकाउंट डेटा को स्थायी रूप से स्टोर करने के लिए MySQL बैकएंड के साथ।"
+            >
+              A command-line ATM simulation supporting secure banking
+              transactions, with a MySQL backend for persistent account data.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">MySQL</span>
+              <span class="project-tag">Python</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-top">
+              <h3>SEMESTER-2</h3>
+              <a
+                class="project-link"
+                href="https://github.com/divyanshg221220/SEMESTER-2"
+                target="_blank"
+                rel="noopener"
+                data-hi="रेपो ↗"
+                >repo ↗</a
+              >
+            </div>
+            <p
+              data-hi="C भाषा में चल रही डेटा-स्ट्रक्चर लैब — ग्राफ, क्यू, स्टैक, और लिंक्ड लिस्ट, ASan/Valgrind के ज़रिए बार-बार डिबगिंग और टेस्ट कवरेज के साथ।"
+            >
+              Data Structures in C - linked lists, stacks, queues, graphs and
+              hashing and collision. For better understanding of working of data
+              structures.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">C</span>
+              <span class="project-tag">Data Structures</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-top">
+              <h3>SEMESTER-1</h3>
+              <a
+                class="project-link"
+                href="https://github.com/divyanshg221220/SEMESTER-1"
+                target="_blank"
+                rel="noopener"
+                data-hi="रेपो ↗"
+                >repo ↗</a
+              >
+            </div>
+            <p
+              data-hi="प्रथम वर्ष के कोर्सवर्क के 422+ कमिट्स — Python की थोड़ी मात्रा के साथ मूलभूत C प्रोग्रामिंग, पूरे सेमेस्टर के प्रॉब्लम सेट्स को ट्रैक करते हुए।"
+            >
+              Programming For Problem Solving in C, Programming In Python -
+              numpy, pandas, matplotlib. For better understanding of working of
+              AI and DS.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">C</span>
+              <span class="project-tag">Programming For Problem Solving</span>
+              <span class="project-tag">Programming In Python</span>
+              <span class="project-tag">Python</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 05 / CERTIFICATIONS ================= -->
+      <section id="certifications">
+        <div class="eyebrow">
+          05 / <span data-hi="प्रमाणपत्र">certifications</span>
+        </div>
+        <h2>
+          <span data-hi="प्रमाणपत्र और कोर्सेज">Certifications & Courses</span>
+          <span class="struct-tag">Cert[]</span>
+        </h2>
+        <div class="cert-grid">
+          <div class="cert-card">
+            <div class="cert-top">
+              <h3>Introduction to IoT and Digital Transformation</h3>
+            </div>
+            <div
+              class="cert-issuer"
+              data-hi="EdCreate Foundation द्वारा, Cisco Networking Academy प्रोग्राम के माध्यम से"
+            >
+              Cisco Networking Academy
+            </div>
+            <div class="cert-date" data-hi="अक्टूबर 2025">Oct 2025</div>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-top">
+              <h3>Generative AI Fluency</h3>
+            </div>
+            <div class="cert-date" data-hi="तारीख जोड़ें">Oct 2025</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 06 / EDUCATION ================= -->
+      <section id="education">
+        <div class="eyebrow">06 / <span data-hi="शिक्षा">education</span></div>
+        <h2 data-hi="शिक्षा">Education</h2>
+        <div class="education-list">
+          <div class="edu-item">
+            <div class="edu-year">2025–2029</div>
+            <div class="edu-main">
+              <h3
+                data-hi="B.Tech, आर्टिफिशियल इंटेलिजेंस और डेटा साइंस इंजीनियरिंग"
+              >
+                B.Tech, Artificial Intelligence & Data Science Engineering
+              </h3>
+              <div
+                class="edu-subtitle"
+                data-hi="यूनिवर्सिटी स्कूल ऑफ ऑटोमेशन एंड रोबोटिक्स (USAR), GGSIPU, दिल्ली"
+              >
+                University School of Automation & Robotics (USAR), GGSIPU, Delhi
+              </div>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-year">2024</div>
+            <div class="edu-main">
+              <h3 data-hi="कक्षा 12 और कक्षा 10">Class 12</h3>
+              <div
+                class="edu-subtitle"
+                data-hi="नियो कॉन्वेंट सीनियर सेकेंडरी स्कूल"
+              >
+                Neo Convent Sr. Sec. School [CBSE]
+              </div>
+              <div
+                class="edu-detail"
+                data-hi="कक्षा 12 कंप्यूटर साइंस: 97/100 · कक्षा 10 कंप्यूटर एप्लिकेशन: 92/100"
+              >
+                75% [Computer Science: <b>97/100</b>]
+              </div>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-year">2022</div>
+            <div class="edu-main">
+              <h3 data-hi="कक्षा 12 और कक्षा 10">Class 10</h3>
+              <div
+                class="edu-subtitle"
+                data-hi="नियो कॉन्वेंट सीनियर सेकेंडरी स्कूल"
+              >
+                Neo Convent Sr. Sec. School [CBSE]
+              </div>
+              <div
+                class="edu-detail"
+                data-hi="कक्षा 12 कंप्यूटर साइंस: 97/100 · कक्षा 10 कंप्यूटर एप्लिकेशन: 92/100"
+              >
+                80% [Computer Applications: <b>92/100</b>]
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 07 / CONTACT ================= -->
+      <section id="contact">
+        <div class="eyebrow">07 / <span data-hi="संपर्क">contact</span></div>
+        <h2 data-hi="संपर्क करें">Get In Touch</h2>
+        <div class="contact-grid">
+          <a class="contact-card" href="mailto:divyanshg221220@gmail.com">
+            <div class="contact-field" data-hi="ईमेल">email</div>
+            <div class="contact-value">divyanshg221220@gmail.com</div>
+          </a>
+          <a
+            class="contact-card"
+            href="https://www.linkedin.com/in/divyanshg221220/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="contact-field">linkedin</div>
+            <div class="contact-value">divyanshg221220</div>
+          </a>
+          <a
+            class="contact-card"
+            href="https://github.com/divyanshg221220"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="contact-field">github</div>
+            <div class="contact-value">divyanshg221220</div>
+          </a>
+          <a
+            class="contact-card"
+            href="https://leetcode.com/u/divyanshg221220/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="contact-field">leetcode</div>
+            <div class="contact-value">divyanshg221220</div>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="foot-line">
+        Divyansh Gupta
+        <span class="separator-arrow">-></span>
+        <span data-hi="AI और डेटा साइंस इंजीनियरिंग छात्र"
+          >AI & DS Engineering Student</span
+        >
+        <span class="separator-arrow">-></span>
+        USAR
+        <span class="separator-arrow">-></span>
+        NULL
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
