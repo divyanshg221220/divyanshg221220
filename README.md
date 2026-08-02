@@ -15,7 +15,7 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-## I'm [Divyansh Gupta](https://divyanshg221220.github.io/PORTFOLIO/) !
+## I'm [Divyansh Gupta](https://divyanshg221220.github.io/divyanshg221220/) !
 
 ### GitHub Stats
 
@@ -26,4 +26,5 @@ Here are some ideas to get you started:
 </div>
 
 ### Want to connect?
+
 Feel free to reach out to me on [LinkedIn](https://www.linkedin.com/in/divyanshg221220/) or send me an [email](mailto:divyanshg221220@outlook.com). I'm always interested in collaborating on exciting projects and meeting fellow developers :)
