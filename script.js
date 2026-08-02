@@ -28,7 +28,12 @@ function initLang() {
   CURRENT_LANG = localStorage.getItem("portfolio-lang") || "en";
   applyLang(CURRENT_LANG);
 
-  document.getElementById("langToggle").addEventListener("click", () => {
+  // The toggle button is optional — the language still applies correctly
+  // from localStorage even if there's no button in the markup to switch it.
+  const toggleBtn = document.getElementById("langToggle");
+  if (!toggleBtn) return;
+
+  toggleBtn.addEventListener("click", () => {
     CURRENT_LANG = CURRENT_LANG === "hi" ? "en" : "hi";
     localStorage.setItem("portfolio-lang", CURRENT_LANG);
     applyLang(CURRENT_LANG);
@@ -47,8 +52,8 @@ function updateQrTheme() {
   const currentTheme = document.documentElement.getAttribute("data-theme");
   qrImage.src =
     currentTheme === "light"
-      ? "divyanshg221220 light.svg"
-      : "divyanshg221220 dark.svg";
+      ? "divyanshg221220-light.svg"
+      : "divyanshg221220-dark.svg";
 }
 
 function updateThemeIcon(theme) {
@@ -62,7 +67,10 @@ function initTheme() {
   updateThemeIcon(theme);
   updateQrTheme();
 
-  document.getElementById("themeToggle").addEventListener("click", () => {
+  const toggleBtn = document.getElementById("themeToggle");
+  if (!toggleBtn) return;
+
+  toggleBtn.addEventListener("click", () => {
     const current = document.documentElement.getAttribute("data-theme");
     const next = current === "light" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", next);
