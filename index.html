@@ -7,16 +7,13 @@
       Divyansh Gupta — Artificial Intelligence & Data Science Engineer
     </title>
 
-    <!-- ============================================================
-         SEO / SHARE PREVIEW
-         Fixes: previously no description, icon, or OG/Twitter tags,
-         so shared links (LinkedIn, WhatsApp, etc.) rendered blank.
-         Replace ogImageUrl below with a real 1200x630 screenshot of
-         the hero section once you have one hosted in this repo.
-    ============================================================= -->
+    <!-- SEO / link-preview metadata (used by search engines and by
+         sites like LinkedIn/WhatsApp when this page is shared) -->
+    <!-- TODO: add a real 1200x630 screenshot of the hero section and
+         uncomment the og:image tag below -->
     <meta
       name="description"
-      content="Divyansh Gupta — first-year B.Tech Artificial Intelligence & Data Science Engineering student at USAR, GGSIPU Delhi. Projects, achievements, and contact."
+      content="Divyansh Gupta — second-year B.Tech Artificial Intelligence & Data Science Engineering student at USAR, GGSIPU Delhi. Projects, achievements, and contact."
     />
     <meta name="theme-color" content="#10131a" />
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
@@ -28,7 +25,7 @@
     />
     <meta
       property="og:description"
-      content="First-year B.Tech AI & DS student at USAR, GGSIPU Delhi. Projects, achievements, and contact."
+      content="Second-year B.Tech AI & DS student at USAR, GGSIPU Delhi. Projects, achievements, and contact."
     />
     <meta
       property="og:url"
@@ -45,16 +42,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Skip link: was missing, so keyboard/screen-reader users had to
-         tab through the entire nav bar before reaching page content. -->
+    <!-- Lets keyboard/screen-reader users jump straight past the nav bar -->
     <a class="skip-link" href="#home">Skip to content</a>
 
-    <!-- ============================================================
-         NAV
-         Order here must match the section order below:
+    <!-- Main nav — link order must match the section order below:
          home -> about -> skills -> achievements -> projects ->
-         certifications -> education -> contact
-    ============================================================= -->
+         certifications -> education -> contact -->
     <nav>
       <div class="navlist">
         <a class="nav-node" href="#home">
@@ -97,7 +90,7 @@
           <span data-hi="संपर्क">contact</span>
         </a>
         <span class="separator-arrow">-></span>
-        <span class="nav-node null">NULL</span>
+        <span class="nav-node nav-node--end">NULL</span>
         <button
           id="langToggle"
           class="lang-toggle"
@@ -137,7 +130,7 @@
         </div>
         <p
           class="intro-text"
-          data-hi="यूनिवर्सिटी स्कूल ऑफ ऑटोमेशन एंड रोबोटिक्स (USAR), GGSIPU दिल्ली में प्रथम वर्ष का B.Tech छात्र। फिलहाल डेटा-स्ट्रक्चर लैब में गहराई से जुटा हूं — C भाषा में लिंक्ड लिस्ट, स्टैक, क्यू और ग्राफ बना रहा हूं, एक-एक malloc के साथ।"
+          data-hi="यूनिवर्सिटी स्कूल ऑफ ऑटोमेशन एंड रोबोटिक्स (USAR), GGSIPU दिल्ली में द्वितीय वर्ष का B.Tech छात्र।"
         >
           Second-year B.Tech student at University School of Automation &
           Robotics (USAR), GGSIPU Delhi.
@@ -196,21 +189,13 @@
         <div class="about-grid">
           <div class="about-text">
             <p
-              data-hi="मैंने कक्षा 11–12 में ही व्यवस्थित रूप से कोडिंग शुरू कर दी थी — NCERT और सुमिता अरोड़ा से Python, और यशवंत कनेटकर की Let Us C से C भाषा — और तब से यह सिलसिला रुका नहीं।"
+              data-hi="जिज्ञासा और तर्क से प्रेरित होकर, मैं मजबूत एप्लिकेशन डिज़ाइन करने, एल्गोरिदम को ऑप्टिमाइज़ करने और व्यावहारिक सॉफ़्टवेयर समाधान बनाने में विशेषज्ञता रखता हूं। चाहे मैं बैकएंड सिस्टम आर्किटेक्ट कर रहा हूं या यूज़र इंटरफ़ेस को फाइन-ट्यून कर रहा हूं, मेरा लक्ष्य सरल है: तेज़, भरोसेमंद और उद्देश्यपूर्ण कोड लिखना जो वास्तविक समस्याओं को हल करे।"
             >
-              I started coding systematically back in Class 11–12 — Python from
-              NCERT and Sumita Arora, C from Yashavant Kanetkar's
-              <strong>Let Us C</strong> — and never really stopped.
-            </p>
-            <p
-              data-hi="यही आदत अब मेरा पूरा वर्कफ़्लो है: लिखो → टेस्ट करो → तोड़ो → डिबग करो → फिर से सबमिट करो। फिलहाल इसका मतलब है USAR के सेमेस्टर 2 के डेटा-स्ट्रक्चर लैब पर काम करना — C में लिंक्ड लिस्ट, स्टैक, क्यू और ग्राफ — और काफी समय dangling pointers तथा off-by-one बग्स को पकड़ने में जाता है।"
-            >
-              That habit is basically my whole workflow now:
-              <strong>write → test → break → debug → resubmit.</strong>
-              Right now that means working through USAR's Semester 2 data
-              structures lab in C — linked lists, stacks, queues, and graphs —
-              with a lot of time spent chasing dangling pointers and off-by-one
-              bugs.
+              Driven by curiosity and logic, I specialize in designing robust
+              applications, optimizing algorithms, and building practical
+              software solutions. Whether I’m architecting backend systems or
+              fine-tuning user interfaces, my goal is simple: write fast,
+              reliable, and purpose-driven code that solves actual problems.
             </p>
             <p
               data-hi="पढ़ाई के अलावा, मैं एक सक्रिय GitHub बनाए रखता हूं, यह पोर्टफोलियो मेंटेन करता हूं, और NIT दिल्ली में हुए राष्ट्रीय स्तर के हैकाथॉन Code Slayer 2k25 में भाग ले चुका हूं।"
@@ -231,9 +216,8 @@
         </div>
       </section>
 
-      <!-- Hidden template for the optional live GitHub stat card.
-           Text lives here in the HTML, not in script.js; script.js only
-           fills in the numeric value it fetches. -->
+      <!-- Hidden template for the live GitHub stat card;
+           script.js clones this and fills in the fetched number. -->
       <template id="githubStatTemplate">
         <div class="stat-box">
           <div class="stat-value" data-role="value">—</div>
@@ -311,9 +295,6 @@
             <span>achievements.log</span>
           </div>
           <div class="achievement-body">
-            <!-- Fixed: each data-hi below previously contained a
-                 different achievement's translation (copy-paste drift).
-                 Each now translates its own English sentence. -->
             <div class="achievement-item">
               <span class="achievement-index">01</span>
               <span class="achievement-text">
@@ -412,10 +393,6 @@
             </div>
           </div>
 
-          <!-- New card: previously this site — the most technically
-               involved project in the current lineup — wasn't listed
-               on itself. Confirm/replace the repo link below if the
-               static site lives in a different repo than assumed. -->
           <div class="project-card">
             <div class="project-top">
               <h3>This Portfolio</h3>
@@ -523,9 +500,7 @@
             <div class="cert-top">
               <h3>Generative AI Fluency</h3>
             </div>
-            <!-- Add the issuing platform (e.g. LinkedIn Learning, Coursera)
-                 here for credibility — a cert with no issuer reads as
-                 unverifiable to a recruiter. -->
+            <!-- TODO: add issuing platform (e.g. LinkedIn Learning) -->
             <div class="cert-date" data-hi="अक्टूबर 2025">Oct 2025</div>
           </div>
         </div>

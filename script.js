@@ -1,10 +1,13 @@
-// ============================================================
 // Divyansh Gupta Portfolio — behavior only.
-// ============================================================
 
 let CURRENT_LANG = "en";
 
-// ---------- 1. language toggle ----------
+/**
+ * Language toggle (English / Hindi)
+ * Every translatable element has a `data-hi` attribute holding the Hindi
+ * version. The first time we switch language, we cache the original
+ * (English) HTML in `data-en` so we can always switch back to it later.
+ */
 function applyLangToScope(scopeEl, lang) {
   scopeEl.querySelectorAll("[data-hi]").forEach((el) => {
     if (el.dataset.en === undefined) {
@@ -21,6 +24,7 @@ function applyLang(lang) {
 }
 
 function initLang() {
+  // Remember the visitor's last choice across page reloads.
   CURRENT_LANG = localStorage.getItem("portfolio-lang") || "en";
   applyLang(CURRENT_LANG);
 
@@ -31,17 +35,25 @@ function initLang() {
   });
 }
 
-// ---------- 2. theme toggle & QR Image Dynamic Switch ----------
+/**
+ * Theme toggle (dark / light)
+ * The QR code image has separate light/dark artwork, so whenever the theme
+ * changes we swap which file it points to as well.
+ */
 function updateQrTheme() {
   const qrImage = document.getElementById("qrImage");
   if (!qrImage) return;
 
   const currentTheme = document.documentElement.getAttribute("data-theme");
-  if (currentTheme === "light") {
-    qrImage.src = "divyanshg221220 light.svg";
-  } else {
-    qrImage.src = "divyanshg221220 dark.svg";
-  }
+  qrImage.src =
+    currentTheme === "light"
+      ? "divyanshg221220 light.svg"
+      : "divyanshg221220 dark.svg";
+}
+
+function updateThemeIcon(theme) {
+  const icon = document.querySelector(".theme-icon");
+  if (icon) icon.textContent = theme === "light" ? "☀" : "☾";
 }
 
 function initTheme() {
@@ -60,25 +72,23 @@ function initTheme() {
   });
 }
 
-function updateThemeIcon(theme) {
-  const icon = document.querySelector(".theme-icon");
-  if (icon) icon.textContent = theme === "light" ? "☀" : "☾";
-}
-
-// ---------- 3. scroll-spy nav ----------
+/**
+ * Scroll-spy navigation
+ * Highlights the nav link for whichever section is currently in view.
+ */
 function initScrollSpy() {
   const sections = document.querySelectorAll("section[id], header[id]");
-  const navNodes = document.querySelectorAll('.navlist .nav-node[href^="#"]');
+  const navLinks = document.querySelectorAll('.navlist .nav-node[href^="#"]');
 
-  const setActive = (id) => {
-    navNodes.forEach((node) => {
-      const isActive = node.getAttribute("href") === `#${id}`;
-      node.style.color = isActive ? "var(--accent)" : "";
-      node.style.borderColor = isActive ? "var(--accent-dim)" : "";
+  const highlightActiveLink = (sectionId) => {
+    navLinks.forEach((link) => {
+      const isActive = link.getAttribute("href") === `#${sectionId}`;
+      link.style.color = isActive ? "var(--accent)" : "";
+      link.style.borderColor = isActive ? "var(--accent-dim)" : "";
       if (isActive) {
-        node.setAttribute("aria-current", "true");
+        link.setAttribute("aria-current", "true");
       } else {
-        node.removeAttribute("aria-current");
+        link.removeAttribute("aria-current");
       }
     });
   };
@@ -86,26 +96,32 @@ function initScrollSpy() {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) setActive(entry.target.id);
+        if (entry.isIntersecting) highlightActiveLink(entry.target.id);
       });
     },
+    // Treat a section as "active" once it's roughly in the middle band
+    // of the viewport, rather than requiring it to fill the whole screen.
     { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
   );
 
   sections.forEach((section) => observer.observe(section));
 }
 
-// ---------- 4. scroll reveal ----------
+/**
+ * Scroll reveal
+ * Fades/slides each section in the first time it scrolls into view,
+ * then stops watching it (the animation only needs to run once).
+ */
 function initScrollReveal() {
   const sections = document.querySelectorAll("section[id]");
   if (!sections.length) return;
 
   const observer = new IntersectionObserver(
-    (entries, obs) => {
+    (entries, observerRef) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("in-view");
-          obs.unobserve(entry.target);
+          observerRef.unobserve(entry.target);
         }
       });
     },
@@ -115,7 +131,12 @@ function initScrollReveal() {
   sections.forEach((section) => observer.observe(section));
 }
 
-// ---------- 5. GitHub stats ----------
+/**
+ * GitHub contribution count
+ * Fetches total contributions from a third-party mirror of GitHub's
+ * contribution graph and renders it into a stat card. Falls back to a
+ * simple message if the request fails.
+ */
 async function addGithubStatCard() {
   const template = document.getElementById("githubStatTemplate");
   const target = document.getElementById("aboutStats");
@@ -128,26 +149,34 @@ async function addGithubStatCard() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
 
-    const total = Object.values(data.total || {}).reduce(
-      (sum, n) => sum + n,
+    const totalContributions = Object.values(data.total || {}).reduce(
+      (sum, count) => sum + count,
       0,
     );
 
-    const clone = template.content.cloneNode(true);
-    clone.querySelector('[data-role="value"]').textContent = total;
-    applyLangToScope(clone, CURRENT_LANG);
-    target.appendChild(clone);
+    const statCard = template.content.cloneNode(true);
+    statCard.querySelector('[data-role="value"]').textContent =
+      totalContributions;
+    applyLangToScope(statCard, CURRENT_LANG);
+    target.appendChild(statCard);
   } catch (err) {
     console.warn("GitHub stats unavailable:", err.message);
+    const message =
+      CURRENT_LANG === "hi"
+        ? "GitHub आँकड़े अभी उपलब्ध नहीं — प्रोफ़ाइल सीधे देखें।"
+        : "GitHub stats unavailable right now — see profile directly.";
     const fallback = document.createElement("div");
     fallback.className = "stat-box";
-    fallback.innerHTML =
-      '<div class="stat-label" style="margin-top:0">GitHub stats unavailable right now — see profile directly.</div>';
+    fallback.innerHTML = `<div class="stat-label" style="margin-top:0">${message}</div>`;
     target.appendChild(fallback);
   }
 }
 
-// ---------- 6. nav mouse-wheel scroll ----------
+/**
+ * Nav bar horizontal scroll
+ * Lets a vertical mouse wheel scroll the nav list sideways when it
+ * overflows, instead of requiring a horizontal scroll gesture.
+ */
 function initNavWheelScroll() {
   const navlist = document.querySelector(".navlist");
   if (!navlist) return;
@@ -155,10 +184,12 @@ function initNavWheelScroll() {
   navlist.addEventListener(
     "wheel",
     (e) => {
-      if (navlist.scrollWidth <= navlist.clientWidth) return;
+      if (navlist.scrollWidth <= navlist.clientWidth) return; // nothing to scroll
+
       const delta =
         Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (delta === 0) return;
+
       e.preventDefault();
       navlist.scrollLeft += delta;
     },
@@ -166,7 +197,11 @@ function initNavWheelScroll() {
   );
 }
 
-// ---------- 7. QR code fallback ----------
+/**
+ * QR code fallback
+ * If the QR image fails to load, mark its frame so CSS can show a
+ * placeholder instead of a broken image icon.
+ */
 function initQrFallback() {
   const img = document.getElementById("qrImage");
   const frame = document.getElementById("qrFrame");
@@ -177,7 +212,7 @@ function initQrFallback() {
   });
 }
 
-// ---------- 8. boot ----------
+// Boot everything once the DOM is ready.
 document.addEventListener("DOMContentLoaded", () => {
   initLang();
   initTheme();

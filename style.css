@@ -238,7 +238,7 @@ nav::after {
   padding: 0 2px;
   flex-shrink: 0;
 }
-.nav-node.null {
+.nav-node.nav-node--end {
   color: var(--text-dim);
   font-style: italic;
 }
@@ -397,7 +397,7 @@ h1 .accent {
 .profile-chip[data-platform="leetcode"] .chip-dot {
   background: var(--accent);
 }
-.profile-chip[data-platform="portfolio"] .chip-dot,
+/* Fallback color for any future chip type not explicitly styled above */
 .profile-chip:not([data-platform="linkedin"]):not([data-platform="github"]):not(
     [data-platform="leetcode"]
   )
